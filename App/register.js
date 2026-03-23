@@ -10,7 +10,6 @@
     following: [],
 }
 */
-
 function getUsers(){
     const stored = localStorage.getItem("users");
     return stored ? JSON.parse(stored) : [];
