@@ -87,6 +87,23 @@ h1 {
     font-size: 2.5rem;
 }
 
+.button{
+    display: block;
+
+    margin: 0 auto;
+    margin-top: 1rem;
+
+    border-radius: 5rem;
+    
+    height: 2rem;
+    width: 10rem;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
 /*==========Register Page STYLING===========*/
 
 .regForm{
@@ -108,23 +125,15 @@ h1 {
     height: 2rem;
 
 }
-.regbutton{
-    display: block;
 
-    margin: 0 auto;
-    margin-top: 1rem;
-
-    border-radius: 5rem;
-    
-    height: 2rem;
-    width: 10rem;
-}
-#alreadyHasAccount {  
+#login-Register-PageReference {  
     display: flex;
     justify-content: center;
 
     margin-top: 2rem;
 }
+
+
 
 
 
