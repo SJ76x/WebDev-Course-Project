@@ -1,18 +1,7 @@
-// CHECK LOGIN
-const user = JSON.parse(localStorage.getItem("currentUser"));
-
-if (!user) {
-  window.location.href = "login.html";
-}
-
-// LOGOUT
-function logout() {
-  localStorage.removeItem("currentUser");
-  window.location.href = "login.html";
-}
+import { generateId, getPosts, savePosts} from './helperFuncs.js';
 
 // CREATE POST
-function createPost() {
+export function createPost() {
   const input = document.getElementById("postInput");
   const content = input.value.trim();
 
@@ -22,35 +11,35 @@ function createPost() {
   }
 
   const newPost = {
-    id: Date.now(),
+    id: generateId("post"),
     user: user.username,
     content: content,
     time: new Date().toLocaleString()
   };
 
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  let posts = getPosts();
 
   posts.unshift(newPost);
 
-  localStorage.setItem("posts", JSON.stringify(posts));
+  savePosts(posts);
 
   input.value = "";
 
   renderPosts();
 }
 // DELETE POST
-function deletePost(id) {
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+export function deletePost(id) {
+  let posts = getPosts();
 
   posts = posts.filter(post => post.id !== id);
 
-  localStorage.setItem("posts", JSON.stringify(posts));
+  savePosts(posts);
 
   renderPosts();
 }
 // FILTER POSTS (FOLLOW SYSTEM)
 function getFeedPosts() {
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  let posts = getPosts();
 
   
   if (!user.following) return posts;
@@ -64,28 +53,28 @@ function renderPosts() {
   const feed = document.getElementById("feed");
   feed.innerHTML = "";
 
-  const posts = getFeedPosts();
-
-  if (posts.length === 0) {
-    feed.innerHTML = "<p>No posts yet...</p>";
-    return;
-  }
+  let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
   posts.forEach(post => {
-    const postDiv = document.createElement("div");
-    postDiv.className = "post";
+    const div = document.createElement("div");
+    div.className = "post";
 
-    postDiv.innerHTML = `
+    div.innerHTML = `
       <h3>${post.user}</h3>
       <p>${post.content}</p>
       <small>${post.time}</small>
-      <br>
-      ${post.user === user.username ? 
-        `<button onclick="deletePost(${post.id})">Delete</button>` : ""}
+
+      <button>Like</button>
+      <button>View Details</button>
+
+      ${
+        post.user === user.username
+        ? `<button onclick="deletePost(${post.id})">Delete</button>`
+        : ""
+      }
     `;
 
-    feed.appendChild(postDiv);
+    feed.appendChild(div);
   });
 }
 
-renderPosts();
