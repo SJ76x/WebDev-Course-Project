@@ -64,27 +64,28 @@ function renderPosts() {
   const feed = document.getElementById("feed");
   feed.innerHTML = "";
 
-  const posts = getFeedPosts();
-
-  if (posts.length === 0) {
-    feed.innerHTML = "<p>No posts yet...</p>";
-    return;
-  }
+  let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
   posts.forEach(post => {
-    const postDiv = document.createElement("div");
-    postDiv.className = "post";
+    const div = document.createElement("div");
+    div.className = "post";
 
-    postDiv.innerHTML = `
+    div.innerHTML = `
       <h3>${post.user}</h3>
       <p>${post.content}</p>
       <small>${post.time}</small>
-      <br>
-      ${post.user === user.username ? 
-        `<button onclick="deletePost(${post.id})">Delete</button>` : ""}
+
+      <button>Like</button>
+      <button>View Details</button>
+
+      ${
+        post.user === user.username
+        ? `<button onclick="deletePost(${post.id})">Delete</button>`
+        : ""
+      }
     `;
 
-    feed.appendChild(postDiv);
+    feed.appendChild(div);
   });
 }
 

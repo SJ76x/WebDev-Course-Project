@@ -2,30 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>News Feed</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feed</title>
+
+  <link rel="stylesheet" href="styles/global.css">
 </head>
 
 <body>
 
-  <header>
-    <h1>News Feed</h1>
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <h2 class="logo">SocialConnect</h2>
+
+  <nav class="nav-links">
+    <button>Profile</button>
+    <button>Feed</button>
     <button onclick="logout()">Logout</button>
-  </header>
+  </nav>
 
-  <main>
+  <input type="text" placeholder="Search users..." class="search">
+</header>
 
-    <!-- Create Post -->
-    <section class="create-post">
-      <textarea id="postInput" placeholder="What's on your mind?"></textarea>
-      <button onclick="createPost()">Post</button>
-    </section>
+<!-- ===== MAIN ===== -->
+<main class="container">
 
-    <!-- Feed -->
-    <section id="feed"></section>
+  <!-- CREATE POST -->
+  <section class="create-post">
+    <input type="text" id="postInput" placeholder="What's on your mind?">
+    <button onclick="createPost()">Post</button>
+  </section>
 
-  </main>
+  <!-- POSTS -->
+  <section id="feed"></section>
 
-  <script src="posts.js"></script>
+</main>
+
+<script src="posts.js"></script>
 </body>
 </html>
