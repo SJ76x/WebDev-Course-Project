@@ -10,32 +10,32 @@
 
 <body id="feedBody">
 
-<!-- ===== NAVBAR ===== -->
-<header id="feedHeader">
-        <h1 id="feedTitle">Home</h1>
-        <nav class="feedNav">
-            <ul>
-                <li><a href="feed.html">Home</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="login.html" id="logoutBtn">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- ===== NAVBAR ===== -->
+  <header id="feedHeader">
+          <h1 id="feedTitle">Home</h1>
+          <nav class="feedNav">
+              <ul>
+                  <li><a href="feed.html">Home</a></li>
+                  <li><a href="profile.html">Profile</a></li>
+                  <li><a href="login.html" id="logoutBtn">Logout</a></li>
+              </ul>
+          </nav>
+      </header>
 
-<!-- ===== MAIN ===== -->
-<main id="feedMain">
+  <!-- ===== MAIN ===== -->
+  <main id="feedMain">
 
-  <!-- CREATE POST -->
-  <section class="create-post">
-    <input type="text" id="postInput" placeholder="What's on your mind?">
-    <button class="tweet-button">Post</button>
-  </section>
+    <!-- CREATE POST -->
+    <section class="create-post">
+      <input type="text" id="postInput" placeholder="What's on your mind?">
+      <button class="tweet-button" id="postBtn">Post</button>
+    </section>
 
-  <!-- POSTS -->
-  <section id="feed"></section>
+    <!-- POSTS -->
+    <section id="feed"></section>
 
-</main>
+  </main>
 
-<script type="module" src="../logic/feed.js"></script>
+  <script type="module" src="../logic/feed.js"></script>
 </body>
 </html>

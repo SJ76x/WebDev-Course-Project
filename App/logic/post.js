@@ -1,4 +1,4 @@
-import { generateId, getPosts, savePosts} from './helperFuncs.js';
+import { generateId, getPosts, savePosts, getCurrentUser, getUsers} from './helperFuncs.js';
 
 // CREATE POST
 export function createPost() {
@@ -13,9 +13,12 @@ export function createPost() {
 
   const newPost = {
     id: generateId("post"),
-    user: user.username,
+    userId: user.id,
     content: content,
-    time: new Date().toLocaleString()
+    image: "",
+    likes: [],
+    comments: [],
+    createdAt: new Date().toLocaleString()
   };
 
   let posts = getPosts();
@@ -43,41 +46,47 @@ function getFeedPosts() {
   let posts = getPosts();
   const user = getCurrentUser();
 
-
   if (!user.following) return posts;
 
   return posts.filter(post =>
-    user.following.includes(post.user) || post.user === user.username
+    user.following.includes(post.userId) || post.userId === user.id
   );
 }
 // RENDER POSTS
 export function renderPosts() {
   const feed = document.getElementById("feed");
+  const user = getCurrentUser();
+
+  let posts = getFeedPosts();
+  
   feed.innerHTML = "";
 
-  let posts = getPosts();
-  posts = getFeedPosts();
-
   posts.forEach(post => {
+    const postAuther = getUsers().find(u => u.id === post.userId);
     const div = document.createElement("div");
     div.className = "post";
 
     div.innerHTML = `
-      <h3>${post.user}</h3>
+      <h3>${postAuther.username}</h3>
       <p>${post.content}</p>
-      <small>${post.time}</small>
+      <small>${post.createdAt}</small>
 
       <button>Like</button>
       <button>View Details</button>
 
       ${
-        post.user === user.username
-        ? `<button class="delete-button" id="${post.id}">Delete</button>`
-        : ""
+        post.userId === user.id
+          ? `<button class="delete-button" data-id="${post.id}">Delete</button>`
+          : ""
       }
     `;
 
     feed.appendChild(div);
+  });
+    document.querySelectorAll(".delete-button").forEach(button => {
+      button.addEventListener("click", () => {
+        deletePost(button.dataset.id);
+    });
   });
 }
 
