@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News Feed</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>News Feed</h1>
+    <button onclick="logout()">Logout</button>
+  </header>
+
+  <main>
+
+    <!-- Create Post -->
+    <section class="create-post">
+      <textarea id="postInput" placeholder="What's on your mind?"></textarea>
+      <button onclick="createPost()">Post</button>
+    </section>
+
+    <!-- Feed -->
+    <section id="feed"></section>
+
+  </main>
+
+  <script src="posts.js"></script>
+</body>
+</html>
