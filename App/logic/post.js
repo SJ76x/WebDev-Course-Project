@@ -4,6 +4,7 @@ import { generateId, getPosts, savePosts} from './helperFuncs.js';
 export function createPost() {
   const input = document.getElementById("postInput");
   const content = input.value.trim();
+  const user = getCurrentUser();
 
   if (content === "") {
     alert("Post cannot be empty!");
@@ -40,8 +41,9 @@ export function deletePost(id) {
 // FILTER POSTS (FOLLOW SYSTEM)
 function getFeedPosts() {
   let posts = getPosts();
+  const user = getCurrentUser();
 
-  
+
   if (!user.following) return posts;
 
   return posts.filter(post =>
@@ -49,11 +51,12 @@ function getFeedPosts() {
   );
 }
 // RENDER POSTS
-function renderPosts() {
+export function renderPosts() {
   const feed = document.getElementById("feed");
   feed.innerHTML = "";
 
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  let posts = getPosts();
+  posts = getFeedPosts();
 
   posts.forEach(post => {
     const div = document.createElement("div");
@@ -69,7 +72,7 @@ function renderPosts() {
 
       ${
         post.user === user.username
-        ? `<button onclick="deletePost(${post.id})">Delete</button>`
+        ? `<button class="delete-button" id="${post.id}">Delete</button>`
         : ""
       }
     `;
@@ -77,4 +80,7 @@ function renderPosts() {
     feed.appendChild(div);
   });
 }
+
+
+
 

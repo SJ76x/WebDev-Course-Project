@@ -1,15 +1,17 @@
 
 import { logoutUser, getCurrentUser} from './helperFuncs.js';
-import { createPost } from './post.js';
+import { createPost, renderPosts } from './post.js';
 
 
 //Dont allow acecss to feed if not logged in
 const currentUser = getCurrentUser();
 if (!currentUser) window.location.href = "login.html";
 
-document.getElementById("feedTitle").textContent = currentUser.username;
-document.getElementById("userPfp").src = currentUser.profilePicture;
 
+
+document.getElementById("feedTitle").textContent = currentUser.username;
+
+document.getElementById("userPfp").src = currentUser.profilePicture;
 
 //delete login id from localStorage to reder logged out
 document.getElementById("logoutBtn").addEventListener("click", () => {
@@ -20,3 +22,6 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 document.querySelector(".tweet-button").addEventListener("click", () => {
   createPost();
 });
+
+renderPosts();
+
