@@ -1,35 +1,8 @@
-/* One User Informaiton Template:
-{
-    id: "user_001",
-    username: "ahmed",
-    email: "ahmed@example.com",
-    password: "Abcd1234",
-    profilePicture: "images/default-avatar.jpeg",
-    bio: "",
-    followers: [],
-    following: [],
-}
-*/
-function getUsers(){
-    const stored = localStorage.getItem("users");
-    return stored ? JSON.parse(stored) : [];
-}
+import { saveUsers, getUsers, generateId} from './helperFuncs.js';
 
-function saveUsers(users){
-    localStorage.setItem("users", (JSON.stringify(users) ));
-}
 
 //load users from localStorage
 const users = getUsers();
-
-//generate unique id number
-function generateId(length = 10) {
-    let id = Math.random().toString(36).slice(2,2+length);
-    while(users.some(a => a.id === id)){
-        id = Math.random().toString(36).slice(2,2+length);
-    }
-    return id;
-}
 
 
 //Handel the Register Button
@@ -85,11 +58,11 @@ form.addEventListener("submit", function(event) {
         // (1) add new user
         users.push(
             {
-                id: generateId(10),
+                id: generateId("user"),
                 username: username,
                 email: email,
                 password: password,
-                profilePicture: "images/default-avatar.jpeg",
+                profilePicture: "../images/default-avatar.jpeg",
                 bio: "",
                 followers: [],
                 following: []

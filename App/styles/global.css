@@ -18,13 +18,13 @@
  
 @media screen and (prefers-color-scheme: dark) {
   :root {
-    --color-bg:  #07428f;
+    --color-bg:  #183862;
     --color-text: #e4edfa;
     --color-title:  #c4dffa;
     --color-subtitle:  #8dbaec;
 
     --color-link: #8cbef2;
-    --color-link-active: #183862;
+    --color-link-active:  #07428f;
     --color-link-hover: #1f6aca;
 
     --color-border:  #c8defc;
@@ -86,6 +86,13 @@ h1, h2, h3 {
 h1 {
     font-size: 2.5rem;
 }
+img {
+  size: 20rem;
+  width: 50%;
+
+  border-radius: 2rem;
+  margin: 0 auto;
+}
 
 .button{
     display: block;
@@ -135,7 +142,84 @@ h1 {
     margin-top: 2rem;
 }
 
+/*==========Feed Page STYLING===========*/
+#feedBody {
+  display: grid;
+  grid-template-areas: 
+  "header main";
+  padding: 0 2.5rem;
 
+}
+
+#feedHeader {
+  grid-area: header;
+}
+
+#feedMain {
+  grid-area: main;
+
+  background-color: #01285a;
+
+  margin: 0rem 2rem 1rem 2rem;
+  padding: 1rem;
+}
+
+.post{
+  display: grid;
+  grid-template-areas: 
+  "img name"
+  "text text";
+
+  border-bottom-style: solid;
+  border-bottom-color: #094792;
+  border-width: 0.2rem;
+
+  padding: 1rem;
+
+  align-items: center;
+  justify-content: left
+
+}
+.post img, .tweet-box img{
+  width: 6rem;
+  grid-area: "img";
+  border-radius: 5rem;
+
+  padding: 1rem;
+}
+
+.post-header{
+  grid-area: "name";
+}
+
+.post-text{
+  grid-area: "text";
+}
+.tweet-box{
+  display: grid;
+}
+
+.tweet-button{
+    display: block;
+
+    margin: 0 auto;
+    margin-top: 1rem;
+
+    border-radius: 5rem;
+    
+    height: 2rem;
+    width: 10rem;
+}
+
+.feedNav li{
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+
+  background-color: #01285a;
+  border-radius: 3rem;
+
+}
 
 
 
