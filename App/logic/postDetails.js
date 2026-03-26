@@ -1,30 +1,31 @@
 import {
   getPosts,
+  savePosts,
   getUsers,
   getComments,
+  saveComments,
   getCurrentUser,
-  logoutUser
-} from "./helperFuncs.js";
+  logoutUser,
+  generateId } from "./helperFuncs.js";
 
-// prohibit access if not logged in
+// Check if logged in
 const currentUser = getCurrentUser();
 if (!currentUser) {
   window.location.href = "login.html";
 }
 
-// Logout
+//Logout button functionality
 document.getElementById("logoutBtn").addEventListener("click", () => {
   logoutUser();
   window.location.href = "login.html";
 });
 
-// Getting postId from URL
 function getPostIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("postId");
 }
 
-// Render the selected post
+// Show selected post:
 function renderSinglePost() {
   const postId = getPostIdFromUrl();
   const posts = getPosts();
@@ -46,14 +47,14 @@ function renderSinglePost() {
     <div class="post">
       <h3>${author ? author.username : "Unknown User"}</h3>
       <p>${post.content}</p>
-      <small>${post.createdAt ? new Date(post.createdAt).toLocaleString() : ""}</small>
+      <small>${post.createdAt || ""}</small>
       <p><strong>Likes:</strong> ${likeCount}</p>
       <p><strong>Comments:</strong> ${commentCount}</p>
     </div>
   `;
 }
 
-// Render all comments for this post
+// Show comments
 function renderComments() {
   const postId = getPostIdFromUrl();
   const comments = getComments();
@@ -78,11 +79,61 @@ function renderComments() {
     div.innerHTML = `
       <h4>${author ? author.username : "Unknown User"}</h4>
       <p>${comment.content}</p>
-      <small>${comment.createdAt ? new Date(comment.createdAt).toLocaleString() : ""}</small>
+      <small>${comment.createdAt || ""}</small>
     `;
 
     commentsList.appendChild(div);
   });
 }
+
+// Add new comment
+function addComment() {
+  const input = document.getElementById("commentInput");
+  const content = input.value.trim();
+  const postId = getPostIdFromUrl();
+
+  if (content === "") {
+    alert("Comment cannot be empty!");
+    return;
+  }
+
+  let comments = getComments();
+  let posts = getPosts();
+
+  const post = posts.find(p => p.id === postId);
+
+  if (!post) {
+    alert("Post not found.");
+    return;
+  }
+
+  const newComment = {
+    id: generateId("comment"),
+    postId: postId,
+    userId: currentUser.id,
+    content: content,
+    createdAt: new Date().toLocaleString()
+  };
+
+  comments.push(newComment);
+  saveComments(comments);
+
+  if (!post.comments) {
+    post.comments = [];
+  }
+
+  post.comments.push(newComment.id);
+  savePosts(posts);
+
+  input.value = "";
+
+  renderSinglePost();
+  renderComments();
+}
+
+//"Add comment" button functionality:
+document.getElementById("addCommentBtn").addEventListener("click", addComment);
+
+// Loadding the page~
 renderSinglePost();
 renderComments();
