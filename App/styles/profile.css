@@ -1,3 +1,47 @@
+@media screen and (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #e4edfa;
+    --color-text: #07428f;
+    --color-title: #297ace;
+    --color-subtitle: #5097e0;
+
+    --color-link: #8dbaec;
+    --color-link-active: #183862;
+    --color-link-hover: #164b8e;
+    --color-link-button: #082449;
+
+    --color-border: #07428f;
+    --color-box-bg: #c8defc;
+
+    --color-posts-bg: #b7d1f8;
+
+    --color-boxLink-hover: #b4d4f5;
+    --color-boxLink: #accdee;
+  }
+}
+ 
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:  #183862;
+    --color-text: #e4edfa;
+    --color-title:  #c4dffa;
+    --color-subtitle:  #8dbaec;
+
+    --color-link: #8cbef2;
+    --color-link-active:  #1060c9;
+    --color-link-hover: #000102;
+    --color-link-button: #082449;
+
+    --color-border:  #d8e2f1;
+    --color-box-bg: #183862;
+
+    --color-posts-bg: #102442;
+
+    --color-boxLink-hover: #b4d4f5;
+
+  }
+}
+
 body {
   display: grid;
   grid-template-areas:
@@ -13,7 +57,7 @@ body {
   grid-area: main;
   min-width: 40rem;
   min-height: 80rem;
-  background-color: #01285a;
+  background-color: var(--color-posts-bg);
   margin: 0rem 2rem 1rem 2rem;
   padding: 1rem;
 }

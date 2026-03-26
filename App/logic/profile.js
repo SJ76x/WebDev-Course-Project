@@ -1,6 +1,6 @@
 import { getUsers, saveUsers, getCurrentUser, getCurrentUserId, getPosts, savePosts, getComments, saveComments, logoutUser } from './helperFuncs.js';
 
-const currentUser = getCurrentUser();
+let currentUser = getCurrentUser();
 if (!currentUser) window.location.href = "login.html";
 
 function getProfileUserId() {
@@ -344,6 +344,8 @@ function handleEditSubmit(event) {
 
 function loadProfilePage() {
   const profileUser = getProfileUser();
+  currentUser = getCurrentUser();
+
 
   if (!profileUser) {
     document.getElementById("profileMain").innerHTML = "<p>User not found.</p>";

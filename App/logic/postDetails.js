@@ -8,6 +8,9 @@ import {
   logoutUser,
   generateId } from "./helperFuncs.js";
 
+import { toggleLike, deletePost } from "./post.js";
+
+
 // Check if logged in
 const currentUser = getCurrentUser();
 if (!currentUser) {
@@ -32,6 +35,8 @@ function renderSinglePost() {
   const users = getUsers();
 
   const post = posts.find(p => p.id === postId);
+
+
   const postContainer = document.getElementById("singlePost");
 
   if (!post) {
@@ -39,19 +44,60 @@ function renderSinglePost() {
     return;
   }
 
+  const userLiked = post.likes.includes(currentUser.id);
+
   const author = users.find(u => u.id === post.userId);
-  const likeCount = post.likes ? post.likes.length : 0;
-  const commentCount = post.comments ? post.comments.length : 0;
+
 
   postContainer.innerHTML = `
-    <div class="post">
-      <h3>${author ? author.username : "Unknown User"}</h3>
-      <p>${post.content}</p>
-      <small>${post.createdAt || ""}</small>
-      <p><strong>Likes:</strong> ${likeCount}</p>
-      <p><strong>Comments:</strong> ${commentCount}</p>
+    <div class="post" id="singlePost">
+      <img src=${author.profilePicture} alt="Profile Picture" class="post-avatar">
+  
+      <h3 class="post-author">${author ? author.username : "Unknown User"}</h3>
+      <p class="post-content">${post.content}</p>
+      <small class="post-date">${post.createdAt}</small>
+      <br><br>
+
+      <button class="like-btn" data-id="${post.id}">
+        ${userLiked ? "Unlike" : "Like"} (${post.likes.length})
+      </button>
+
+      <button class="details-btn" data-id="${post.id}">
+        Comment (${post.comments.length})
+      </button>
+
+      ${
+        post.userId === currentUser.id
+          ? `<button class="delete-button" data-id="${post.id}">Delete</button>`
+          : ""
+      }
+
     </div>
   `;
+
+  // Like button
+  document.querySelectorAll(".like-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      toggleLike(button.dataset.id);
+      renderSinglePost();
+    });
+  });
+
+  // View details button
+  document.querySelectorAll(".details-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      window.location.href = "post.html?postId=" + button.dataset.id;
+    });
+  });
+
+  // Delete button
+  document.querySelectorAll(".delete-button").forEach(button => {
+    button.addEventListener("click", () => {
+      deletePost(button.dataset.id);
+      window.location.href = "feed.html";
+    });
+  });
+
 }
 
 // Show comments
@@ -77,9 +123,10 @@ function renderComments() {
     div.className = "comment";
 
     div.innerHTML = `
-      <h4>${author ? author.username : "Unknown User"}</h4>
-      <p>${comment.content}</p>
-      <small>${comment.createdAt || ""}</small>
+      <img src=${author.profilePicture} alt="Profile Picture" class="post-avatar">
+      <h3 class="comment-author">${author ? author.username : "Unknown User"}</h4>
+      <p class="comment-content">${comment.content}</p>
+      <small class="comment-date">${comment.createdAt || ""}</small>
     `;
 
     commentsList.appendChild(div);
@@ -137,3 +184,4 @@ document.getElementById("addCommentBtn").addEventListener("click", addComment);
 // Loadding the page~
 renderSinglePost();
 renderComments();
+

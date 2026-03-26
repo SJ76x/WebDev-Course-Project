@@ -34,11 +34,11 @@ export function deletePost(id) {
   let posts = getPosts();
   posts = posts.filter(post => post.id !== id);
   savePosts(posts);
-  renderPosts();
+  
 }
 
 // like feature
-function toggleLike(postId) {
+export function toggleLike(postId) {
   let posts = getPosts();
   const currentUser = getCurrentUser();
 
@@ -57,7 +57,7 @@ function toggleLike(postId) {
   }
 
   savePosts(posts);
-  renderPosts();
+  
 }
 
 // FILTER POSTS (FOLLOW SYSTEM)
@@ -92,8 +92,10 @@ export function renderPosts() {
     div.className = "post";
 
     div.innerHTML = `
-      <img src=${author.profilePicture} alt="Profile Picture" class="post-avatar">
-      <h3 class="post-author">${author ? author.username : "Unknown User"}</h3>
+      <a href="profile.html?userId=${post.userId}"><img src=${author.profilePicture} alt="Profile Picture" class="post-avatar"></a>
+
+      <a href="profile.html?userId=${post.userId}"><h3 class="post-author">${author ? author.username : "Unknown User"}</h3></a>
+      
       <p class="post-content">${post.content}</p>
       <small class="post-date">${post.createdAt}</small>
       <br><br>
@@ -103,7 +105,7 @@ export function renderPosts() {
       </button>
 
       <button class="details-btn" data-id="${post.id}">
-        View Details (${post.comments.length})
+        Comment (${post.comments.length})
       </button>
 
       ${
@@ -120,6 +122,7 @@ export function renderPosts() {
   document.querySelectorAll(".like-btn").forEach(button => {
     button.addEventListener("click", () => {
       toggleLike(button.dataset.id);
+      renderPosts();
     });
   });
 
@@ -134,6 +137,7 @@ export function renderPosts() {
   document.querySelectorAll(".delete-button").forEach(button => {
     button.addEventListener("click", () => {
       deletePost(button.dataset.id);
+      renderPosts();
     });
   });
 }
