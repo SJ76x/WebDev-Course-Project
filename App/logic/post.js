@@ -92,9 +92,10 @@ export function renderPosts() {
     div.className = "post";
 
     div.innerHTML = `
-      <h3>${author ? author.username : "Unknown User"}</h3>
-      <p>${post.content}</p>
-      <small>${post.createdAt}</small>
+      <img src=${author.profilePicture} alt="Profile Picture" class="post-avatar">
+      <h3 class="post-author">${author ? author.username : "Unknown User"}</h3>
+      <p class="post-content">${post.content}</p>
+      <small class="post-date">${post.createdAt}</small>
       <br><br>
 
       <button class="like-btn" data-id="${post.id}">
