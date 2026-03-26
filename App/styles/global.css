@@ -450,15 +450,12 @@ img {
   grid-area: post-btn;
 
     width: 100%;
-  margin-top: 10px;
+  margin-top: 0;
   border-radius: 20px;
 }
 ::placeholder{
   color: var(--color-link);
 }
-
-
-
 
 
 /* ===== NAVBAR ===== */
@@ -472,10 +469,6 @@ img {
   margin-bottom: 2rem;
 }
 
-.logo {
-  font-size: 1.5rem;
-  color: var(--color-title);
-}
 
 /* NAV BUTTONS */
 .nav-links button {
@@ -493,9 +486,68 @@ img {
   border: 1px solid var(--color-border);
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (max-width: 768px) {
+  /*===========FEED PAGE===========*/
+  #feedBody {
+    grid-template-areas:
+        "header"
+        "main";
+      
+  }
+
+  #feedMain {
+    min-width: auto;
+    margin: 0;
+  }
+  #feedHeader {
+    grid-area: header;
+    background-color: var(--color-posts-bg);
+
+  }
+  #feedHeader li {
+    background-color: var(--color-box-bg);
+    margin: 1rem;
+  }
+
+  /*===========POST PAGE===========*/
+
+  #postBody{
+    grid-template-areas: 
+    "header" 
+    "main";
+    padding: 0rem;
+  }
+  #postHeader{
+    background-color: var(--color-posts-bg);
+    overflow: auto;
+  }
+  #postHeader li{
+    background-color: var(--color-box-bg);
+    margin: 1rem;
+  }
+  #postMain{
+    min-width: 20rem;
+    min-height: 20rem;
+    margin: 0;
+  }
 
 
+ 
+}
+
+@media screen and (max-width: 490px) {
+  #feedBody {
+    padding: 0 0.5rem;
+  }
+
+  .profile-avatar {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  #email{
+    min-width: 0;
+  }
 }
 
 
