@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "client"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid(2))
+  username  String   @unique
+  email     String   @unique
+  password  String
+  bio       String?
+  profilePicture String?
+  createdAt DateTime @default(now())
+
+  posts Post[]
+  comments Comment[]
+  likes Like[]
+
+  following Follow[] @relation("Follower")
+  followers Follow[] @relation("Followed")
+}
+
+model Post {
+  id        String   @id @default(cuid(2))
+  content   String
+  image     String?
+  createdAt DateTime @default(now())
+
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  comments Comment[]
+  likes Like[]
+}
+
+model Comment {
+  id        String   @id @default(cuid(2))
+  content   String
+  createdAt DateTime @default(now())
+
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+model Like {
+  id        String   @id @default(cuid(2))
+
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+}
+
+model Follow {
+  id        String   @id @default(cuid(2))
+
+  followerId String
+  follower   User     @relation("Follower", fields: [followerId], references: [id], onDelete: Cascade)
+
+  followingId String
+  followed   User     @relation("Followed", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+}
+
+
