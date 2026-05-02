@@ -18,7 +18,7 @@ model User {
   email     String   @unique
   password  String
   bio       String?
-  profilePicture String @default("/images/default-avatar.jpeg")
+  profilePicture String? @default("/images/default-avatar.jpeg")
   createdAt DateTime @default(now())
 
   posts Post[]

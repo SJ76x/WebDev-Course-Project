@@ -135,9 +135,12 @@ async function renderSuggestedUsers() {
   const allUsers = await getUsers();
   const suggestedList = document.getElementById("suggestedUsersList");
 
-  const me = await getUserById(currentUser.id);
-  
-  const suggested = allUsers.filter(u => u.id !== currentUser.id);
+  // Get the IDs the current user follows
+  const followingIds = currentUser.following?.map(f => f.followingId) || [];
+
+  const suggested = allUsers.filter(u =>
+    u.id !== currentUser.id && !followingIds.includes(u.id)
+  );
 
   if (suggested.length === 0) {
     suggestedList.innerHTML = "<p>No suggestions right now.</p>";

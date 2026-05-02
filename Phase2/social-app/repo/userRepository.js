@@ -9,6 +9,7 @@ export async function getUserById(id) {
     where: { id },
     include: {
       followers: { select: { followerId: true } },
+      following: { select: { followingId: true } },
       _count: {
         select: {
           posts: true,
