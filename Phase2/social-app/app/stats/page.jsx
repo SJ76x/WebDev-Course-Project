@@ -32,7 +32,7 @@ export default function StatsPage() {
         );
     }
 
-    const cardStyle = "border border-gray-300 rounded-lg p-5 bg-white shadow-sm";
+    const cardStyle = "border border-blue-500 rounded-lg p-5 bg-blue shadow-sm";
     const headingStyle = "text-lg font-semibold mb-2";
     const bigNumberStyle = "text-3xl font-bold";
 
@@ -117,7 +117,7 @@ export default function StatsPage() {
                             {stats.top5UsersByFollowers.map((user) => (
                                 <li key={user.id}>
                                     <span className="font-semibold">@{user.username}</span>{" "}
-                                    <span className="text-gray-600">
+                                    <span className="text-gray-300">
                                         — {user._count.followers} followers
                                     </span>
                                 </li>
