@@ -1,0 +1,313 @@
+@media screen and (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #e4edfa;
+    --color-text: #07428f;
+    --color-title: #297ace;
+    --color-subtitle: #5097e0;
+
+    --color-link: #8dbaec;
+    --color-link-active: #183862;
+    --color-link-hover: #164b8e;
+    --color-link-button: #082449;
+
+    --color-border: #07428f;
+    --color-box-bg: #c8defc;
+
+    --color-posts-bg: #b7d1f8;
+
+    --color-boxLink-hover: #b4d4f5;
+    --color-boxLink: #accdee;
+  }
+}
+ 
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:  #183862;
+    --color-text: #e4edfa;
+    --color-title:  #c4dffa;
+    --color-subtitle:  #8dbaec;
+
+    --color-link: #8cbef2;
+    --color-link-active:  #1060c9;
+    --color-link-hover: #000102;
+    --color-link-button: #082449;
+
+    --color-border:  #d8e2f1;
+    --color-box-bg: #183862;
+
+    --color-posts-bg: #102442;
+
+    --color-boxLink-hover: #b4d4f5;
+
+  }
+}
+
+body {
+  display: grid;
+  grid-template-areas:
+    "header main";
+  padding: 0 2.5rem;
+}
+
+#profileHeader {
+  grid-area: header;
+}
+
+#profileMain {
+  grid-area: main;
+  min-width: 40rem;
+  min-height: 80rem;
+  background-color: var(--color-posts-bg);
+  margin: 0rem 2rem 1rem 2rem;
+  padding: 1rem;
+}
+
+.profile-card {
+  background: var(--color-box-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
+#profileUsername {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+#profileBio {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.profile-stats strong {
+  color: var(--color-title);
+}
+
+#profileActions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.edit-form-container {
+  background: var(--color-box-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.edit-form-container label {
+  display: block;
+  margin-top: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.edit-form-container input,
+.edit-form-container textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+  border: 1px solid var(--color-border);
+}
+
+.edit-form-container textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.char-count {
+  font-size: 0.8rem;
+  color: gray;
+  text-align: right;
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.success {
+  color: #27ae60;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.profile-posts-section {
+  margin-top: 2rem;
+}
+
+.profile-posts-section h2 {
+  margin-bottom: 1rem;
+}
+
+.user-post {
+  background: var(--color-box-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.user-post h3 {
+  text-align: left;
+  margin: 0;
+}
+
+.user-post p {
+  margin: 0.5rem 0;
+}
+
+.user-post small {
+  color: gray;
+}
+
+.user-post button {
+  width: 100%;
+  margin-top: 0.5rem;
+  border-radius: 20px;
+}
+
+.suggested-section {
+  margin-top: 2rem;
+}
+
+.suggested-section h2 {
+  margin-bottom: 1rem;
+}
+
+.suggested-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-box-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 0.8rem 1rem;
+  margin-top: 0.8rem;
+}
+
+.suggested-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.suggested-user-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.suggested-user-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.follow-btn, .unfollow-btn, .edit-profile-btn, .delete-btn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.follow-btn {
+  background-color: #297ace;
+  color: white;
+}
+
+.follow-btn:hover {
+  background-color: #164b8e;
+}
+
+.unfollow-btn {
+  background-color: #555;
+  color: white;
+}
+
+.unfollow-btn:hover {
+  background-color: #c0392b;
+}
+
+.edit-profile-btn {
+  background-color: #297ace;
+  color: white;
+}
+
+.edit-profile-btn:hover {
+  background-color: #164b8e;
+}
+
+.delete-btn {
+  background-color: #c0392b;
+  color: white;
+  font-size: 0.8rem;
+  padding: 5px 12px;
+}
+
+.delete-btn:hover {
+  background-color: #922b21;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
+  #profileMain {
+    min-width: auto;
+    margin: 0;
+  }
+
+  .profile-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 0 0.5rem;
+  }
+
+  .profile-avatar {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  #profileUsername {
+    font-size: 1.4rem;
+  }
+
+  .profile-stats {
+    font-size: 0.85rem;
+  }
+}

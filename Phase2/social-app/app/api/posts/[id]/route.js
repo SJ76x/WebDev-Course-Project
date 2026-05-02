@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getPostById, deletePost } from "@/repo/postRepository";
+import { getPostById, deletePost } from "../../../../repo/postRepository";
 
 export async function GET(request, { params }) {
     const { id } = await params;

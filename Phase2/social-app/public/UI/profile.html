@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/profile.css">
+</head>
+
+<body>
+
+<header id="profileHeader">
+  <h1 id="profileTitle">Profile</h1>
+  <nav class="feedNav">
+              <ul>
+        <a href="feed.html"><li><img src="../images/home.png" alt="">Home</li></a>
+        <a href="profile.html"><li><img src="../images/user.png" alt="">Profile</li></a>
+        <a href="login.html" id="logoutBtn"><li><img src="../images/sign-out-alt.png" alt="">Logout</li></a>
+      </ul>
+    </nav>
+</header>
+
+<main id="profileMain">
+
+  <section class="profile-card" id="profileCard">
+    <img id="profilePicture" src="../images/default-avatar.jpeg" alt="Profile Picture" class="profile-avatar">
+    <h2 id="profileUsername">username</h2>
+    <p id="profileBio">No bio yet.</p>
+
+    <div class="profile-stats">
+      <span id="statPosts"><strong>0</strong> Posts</span>
+      <span id="statFollowers"><strong>0</strong> Followers</span>
+      <span id="statFollowing"><strong>0</strong> Following</span>
+    </div>
+
+    <div id="profileActions"></div>
+  </section>
+
+  <div class="edit-form-container" id="editFormContainer" style="display:none;">
+    <h2>Edit Profile</h2>
+    <form id="editProfileForm">
+      <label for="editUsername">Username</label>
+      <input type="text" id="editUsername" name="editUsername" required minlength="3" maxlength="20">
+      <div class="error" id="editUsername-error"></div>
+
+      <label for="editEmail">Email</label>
+      <input type="email" id="editEmail" name="editEmail" required>
+      <div class="error" id="editEmail-error"></div>
+
+      <label for="editBio">Bio</label>
+      <textarea id="editBio" name="editBio" rows="3" maxlength="160" placeholder="Tell us about yourself..."></textarea>
+      <div class="char-count"><span id="bioCharCount">0</span>/160</div>
+
+      <div class="edit-buttons">
+        <button type="button" class="button" id="cancelEditBtn">Cancel</button>
+        <button type="submit" class="button">Save</button>
+      </div>
+      <div class="error" id="edit-error"></div>
+      <div class="success" id="edit-success"></div>
+    </form>
+  </div>
+
+  <section class="profile-posts-section">
+    <h2 id="postsSectionTitle">Posts</h2>
+    <div id="userPostsList"></div>
+    <p id="noPostsMessage" style="display:none;">No posts yet.</p>
+  </section>
+
+  <section class="suggested-section">
+    <h2>People you might know</h2>
+    <div id="suggestedUsersList"></div>
+  </section>
+
+</main>
+
+<script type="module" src="../logic/profile.js"></script>
+</body>
+</html>
