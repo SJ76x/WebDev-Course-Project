@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllPosts, createPost } from "@/repo/postRepository";
+import { getAllPosts, createPost } from "../../../repo/postRepository";
 
 export async function GET() {
     const posts = await getAllPosts();
