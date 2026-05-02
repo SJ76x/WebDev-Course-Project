@@ -5,6 +5,7 @@ export async function getAllPosts() {
         orderBy: { createdAt: 'desc' },
         include: {
             author: true,
+            likes: { select: { userId: true } },
             _count: {
                 select: {
                     likes: true,
@@ -20,6 +21,7 @@ export async function getPostById(id) {
         where: { id: id },
         include: {
             author: true,
+            likes: { select: { userId: true } },
             _count: {
                 select: {
                     likes: true,
@@ -44,6 +46,23 @@ export async function getPostsByUser(userId) {
             }
         }
     });
+}
+
+export async function getFeedPosts(userId) {
+  return await prisma.post.findMany({
+    where: {
+      OR: [
+        { authorId: userId },
+        { author: { followers: { some: { followerId: userId } } } }
+      ]
+    },
+    orderBy: { createdAt: 'desc' },
+    include: {
+      author: true,
+      likes: { select: { userId: true } },
+      _count: { select: { likes: true, comments: true } }
+    }
+  });
 }
 
 export async function createPost(data) {

@@ -12,7 +12,7 @@ export function logoutUser() {
   localStorage.removeItem("currentUserId");
 }
 
-// Functions that Fetch from the server api
+// ===Functions that Fetch from the server api===
 // Users
 export async function getUsers(){
     const res = await fetch("/api/users");
@@ -88,6 +88,25 @@ export async function addComment(postId, content, authorId) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content, authorId }),
+  });
+  return res.json();
+}
+
+//follow
+export async function toggleFollow(followerId, targetUserId) {
+  const res = await fetch(`/api/users/${targetUserId}/follow`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ followerId }),
+  });
+  return res.json();
+}
+
+export async function updateProfile(userId, data) {
+  const res = await fetch(`/api/users/${userId}/profile`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
   });
   return res.json();
 }

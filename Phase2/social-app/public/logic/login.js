@@ -1,14 +1,10 @@
 import { getUsers, saveCurrentUserId } from './helperFuncs.js';
 
 
-//load users from localStorage
-const users = getUsers();
-
-
 //Handel the Login Button
 const form = document.querySelector(".loginForm");
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", async function(event) {
     event.preventDefault();
     
     const email = form.email.value.trim();
@@ -19,14 +15,19 @@ form.addEventListener("submit", function(event) {
     document.getElementById("password-error").innerText = "";
     
     //Find User with matching credentials
-    const user = users.find(u => u.email === email && u.password === password);
+    const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+    });
 
+    const data = await res.json();
 
-    if(user === undefined){
+    if(!res.ok){
         document.getElementById("password-error").innerText = "Worng Email or Password";
     }
     else{
-        saveCurrentUserId(user.id); //Mark user as active
+        saveCurrentUserId(data.id); //Mark user as active
         window.location.href = "feed.html"; //Correct Creds => redirect to feed page
     } 
 

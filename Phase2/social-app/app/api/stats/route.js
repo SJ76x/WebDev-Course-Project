@@ -6,7 +6,7 @@ import {
     getMostLikedPost,
     getMostCommentedPost,
     getTop5UsersByFollowers,
-} from "@/repo/statsRepository";
+} from "../../../repo/statsRepository";
 
 export async function GET() {
     const averageFollowersPerUser = await getAverageFollowersPerUser();

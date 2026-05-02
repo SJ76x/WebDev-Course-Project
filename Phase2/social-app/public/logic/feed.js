@@ -16,7 +16,7 @@ async function init(){
     window.location.href = "login.html";
   });
 
-  document.getElementById("postBtn").addEventListener("click", () => {
+  document.getElementById("postBtn").addEventListener("click", async () => {
     await postNewPost();
   });
 

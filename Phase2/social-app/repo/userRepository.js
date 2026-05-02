@@ -8,6 +8,7 @@ export async function getUserById(id) {
   return await prisma.user.findUnique({
     where: { id },
     include: {
+      followers: { select: { followerId: true } },
       _count: {
         select: {
           posts: true,
